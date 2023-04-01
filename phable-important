@@ -1,0 +1,773 @@
+S3
+
+
+https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
+
+
+Policy for alb access
+{
+"Version": "2012-10-17",
+"Statement": [
+{
+"Effect": "Allow",
+"Principal": {
+"AWS": "arn:aws:iam::718504428378:root"
+},
+"Action": "s3:PutObject",
+"Resource": [
+"arn:aws:s3:::social-commerce-alb-access-logs/dev/api/AWSLogs/376467926685/*",
+"arn:aws:s3:::social-commerce-alb-access-logs/dev/frontend/AWSLogs/376467926685/*",
+"arn:aws:s3:::social-commerce-alb-access-logs/prod/api/AWSLogs/376467926685/*",
+"arn:aws:s3:::social-commerce-alb-access-logs/prod/frontend/AWSLogs/376467926685/*"
+]
+}
+]
+}
+
+
+
+
+S3 bucket latency issues digging
+Enable bucket login first and check the logs… if can’t see any relevant msg then create table in Athena and check the s3 total time there using was.request.id
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-s3-access-logs-to-identify-requests.html#querying-s3-access-logs-for-requests
+
+
+
+
+
+
+
+
+
+Load balancer log push — name: phable-blog-website-prod
+Naming should be Phable-blog-website
+Enable the log for s3 bucket first
+
+
+
+
+Logs from efs file push to elk
+
+ /new-phable-logs/phable-website
+
+
+
+
+Social-commmerce
+
+
+
+
+"filebeat","-e","-strict.perms=false"
+
+/usr/share/filebeat/data/
+ filebeat_data
+
+/usr/share/logs/
+Efs-logs
+
+
+
+
+
+/usr/share/logs/	efs-logs	
+/usr/share/filebeat/data	filebeat_data	
+
+
+
+
+
+Ec2 machine — t3a.medium
+Jmeter ka master and slave setup
+Vac 172. Wala
+
+
+
+
+Excel sheet for 1 week
+Account access for phable to check the go access nginx record
+
+
+Endpoint\
+
+Health nonprod machine
+Endpoint search mehealthpe pg. Sreenivasan 
+
+
+vpc-07e1a4cf593cc3284
+Dev: 10.164.0.119
+Prod: 10.164.186.174
+
+
+Healthpe side
+Dev machine sg 
+rds-postgresql-nonProd-sg sg-0de854afad73a69a8
+
+— routing looks good to me
+— Configuration looks good to me
+Security groups are ideal
+ACL is good	
+
+
+
+
+
+
+sg-019da2e107359bc42
+
+
+sg-01170f55dd3fb1427
+106.193.27.113/32
+
+
+
+curl --location --request POST 'https://phable-redis-stg.phablecare.com/setExKey' --header 'appType: 5'  --header 'phable-service-secret: MadrobotGetsHoldOfRedis' --header 'Content-Type: application/json' --data-raw '{ "key": "KEY NAME", "value": "1000", "ex": 86400 }' 
+
+
+Curl get https://phable-redis-stg.phablecare.com/setExKey
+
+
+
+Deletion for old-vr bucket
+
+
+
+
+Older than 90 days should be in glacier
+
+Devsprint
+
+
+
+
+
+
+New task
+Pushing all new lines added to error.log file to slack with 1 minute of time interval
+
+https://stackoverflow.com/questions/65319034/show-only-newly-added-lines-of-logfile-in-terminal
+https://unix.stackexchange.com/questions/554687/send-mail-on-change-of-line-in-log-file-tail-f-piping-to-mail-doesnt-work
+
+Able to print new lines using watch but issue is how sns will take it up?
+
+
+S3 bucket policy
+
+FORMAT
+LOG_PATH
+
+
+
+
+Elastic search downgrade
+
+
+Healthpe mount system
+Container got mounted to /usr/share/logs/
+
+
+Prod/api
+
+
+
+Create a single script
+
+Admin
+Device
+Doctor
+Event
+Petient
+Thirtdparty
+
+
+Blogsite
+Microsite in social 
+
+2022-12-06T13:16:29: PM2 log: App [log-trace-and-alert-Doctor:1] exited with code [0] via signal [SIGINT]
+
+
+
+
+
+https://www.linuxquestions.org/questions/programming-9/display-last-5-minutes-of-log-file-only-4175703437/
+
+
+
+2022-12-05T01:23:40: awk: /usr/share/logs/prod//doctor/api/out.log: No such file or directory
+
+
+awk: LOG_PATH/admin/api/out.log: No such file or directory
+
+
+
+
+Sunils requirements
+Endpoint details 
+
+
+
+
+Test-result directory should be empty or else able to create a new directory.
+
+
+
+
+--------------------------------------------------
+Monitoring
+
+Monitoring note 1.
+Ec2 machine stats
+Health peProxy server
+
+
+Monitoring rds using performance insights:
+—> Transaction should not be more than 10
+—> Commit and session should be same
+—> Jump host ip start from 10.0
+—> 172.16.1.198 this ip -phable ip
+
+
+
+
+Celeryworker...api and secret env update inside sprint environment. —DevOps request?
+
+
+
+Rabbitmq —flower use for — rabbitmq-UI-tool(flower)
+
+Dev and stage disable?
+
+
+
+
+
+
+2022-11-23 09:34:32
+INFO prod:ip-10-10-1-180.ap-south-1.compute.internal PPMDN1JO167PWNAS4JEU 2022-11-23 04:04:32,129 app.core.deps:get_readonly_database:77 Session ID: 140145012010208 created
+INFO prod:ip-10-10-1-180.ap-south-1.compute.internal PPMDN1JO167PWNAS4JEU 2022-11-23 04:04:32,129 app.core.deps:get_readonly_database:77 Session ID: 140145012010208 created
+
+
+
+
+--------------------------------------------------
+Proxy server setup for mysql servers
+
+Databricks(multiple ec2 instance with mysql) —>> proxy server(with static IP) —> mysql lsb( 3rd
+party sql server)
+
+Jump server: ssh -p 4563 rahul_chauhan@bastionhost.phable.in
+MYSQL Source: ssh ec2-user@10.70.44.67. root/sup3rPw#
+ProxyServer: ssh ec2-user@13.233.196.54
+
+mysql -u admin -padmin -h localhost -P6032 --prompt 'ProxySQL Admin> '
+
+3 layer
+Memory: modification over cli interface
+Runtime: saving in runtime will used by proxysql
+Disk: persistent the runtime configuration on disk.
+
+Steps to setup proxysql
+1. Install the proxysql
+2. Setup the administrator account
+3. Change the administrator account password
+4. Save the configuration on disk level.
+5. We have to add sys.sql file in our node database and create a dedicated user, which can
+talk with proxysql.
+
+6. Then in proxy pass update the mysql-monitor_username variable with the new user name
+which we have created on node server and save the config on disk level.
+7. Now you can add that node to proxysql pool and save config.
+8.
+9.
+
+CREATE USER 'playgrounduser'@'%' IDENTIFIED BY 'Play@User';
+
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+ALTER USER 'testuser'@'%' IDENTIFIED WITH mysql_native_password BY '1234';
+FLUSH PRIVILEGES;
+
+--------------------------------------------------
+Grafana task
+
+S3 ans sqs configuration
+1. First creare SQS in the same region of s3 bucket.
+2. Configure it with s3 bucket and in event section use that SQS.
+3. Now verify it’s working using the pulling if data is there or not.
+4. Now create fluentd.conf file and try to deploy it in ecs cluster.
+5. Fluentd latest version is 1.14.2
+6. Build and push the images to ear and the deploy it to ecs.
+
+Creating IAM role for s3 bucket, so tha
+
+https://medium.com/@devfire/deploying-the-elk-stack-on-amazon-ecs-dd97d671df06
+https://medium.com/opseco-technologies/what-is-an-elasticsearch-cluster-dce98ed3edc0
+
+Unsupported Action In Policy: The action SQS:SendMessage is not supported for the
+resource-based policy attached to resource type S3 Bucket.
+Unsupported Resource ARN In Policy: The resource ARN is not supported for the resource-based
+policy attached to resource type S3 Bucket
+
+"Resource": "arn:aws:s3:::surplace-audio/*"
+
+Setting up elasticsearch with multimode
+Variables
+discovery.ec2.endpoint: this will help to find the eligible node address in ec2
+
+I’m role for ec2 ti s3
+https://devopsdiary.tech/tech/s3-elasticsearch-snapshots/
+
+curl --proto "https" -o "/tmp/ecs-anywhere-install.sh"
+"https://amazon-ecs-agent.s3.amazonaws.com/ecs-anywhere-install-latest.sh" && bash
+/tmp/ecs-anywhere-install.sh --region "ap-south-1" --cluster "elasticsearch" --activation-id
+"3d117553-84ce-4de8-9047-abcd3e7f09da" --activation-code "evdLw6Mc0Fek2A+gKEh5"
+,
+https://aws.plainenglish.io/aws-ecs-cluster-using-the-ec2-launch-type-cb5ae2347b46
+
+Gonna start creating grafana and prometheus container and later using log stash input will pull
+data from s3 to prometheus.
+https://www.instaclustr.com/blog/hosting-prometheus-on-amazon-elastic-container-service-ecs-to
+-monitor-metrics-for-your-instaclustr-clusters/
+https://medium.com/@pierangelo1982/connect-logstash-to-aws-s3-ad606d35f72d
+Or else we can create elasticsearch and will use that inplace of prometheus.
+
+https://www.youtube.com/watch?v=Ysd9tWuhE8g
+
+Phable@2022
+
+Elasticsearch with node — next task
+Healthpa log push issues
+
+export GF_SMTP_ENABLED=true
+export GF_SMTP_ENABLED=false
+export GF_SMTP_HOST=localhost:25
+export GF_SMTP_USER=
+export GF_SMTP_PASSWORD=
+export GF_SMTP_CERT_FILE=
+export GF_SMTP_KEY_FILE=
+export GF_SMTP_SKIP_VERIFY=false
+export GF_SMTP_FROM_ADDRESS=admin@grafana.localhost
+export GF_SMTP_FROM_NAME=grafana
+export GF_SMTP_EHLO_IDENTITY=
+export GF_SMTP_STARTTLS_POLICY=
+
+SMTP Username:
+AKIAWF4UPRXJ45PV4UPX
+SMTP Password:
+BL424ZzRYGGSQ/YrMoEiKe3y77ZH1ZDfmsiDuqEhz3as
+SMTP endpoint
+email-smtp.ap-south-1.amazonaws.com
+From: noreply.phable.in
+
+GF_SMTP_ENABLED true
+GF_SMTP_FROM_ADDRESS noreply.phable.in
+GF_SMTP_HOST email-smtp.ap-south-1.amazonaws.com
+GF_SMTP_PASSWORD BL424ZzRYGGSQ/YrMoEiKe3y77ZH1ZDfmsiDuqEhz3as
+GF_SMTP_USER. AKIAWF4UPRXJ45PV4UPX
+
+Grafana prometheus stop
+Machine downgrade
+Heap memory
+Healthpae log pusher
+
+
+
+
+--------------------------------------------------
+Log pusher
+
+
+filebeat -e -strict.perms=false
+
+2022-11-04T17:08:11.592+0530 INFO instance/beat.go:686 Home path: [/usr/share/filebeat] Config
+path: [/usr/share/filebeat/config] Data path: [/usr/share/filebeat/data] Logs path: [/usr/share/filebeat/logs]
+Hostfs Path: [/]
+2022-11-04T17:08:11.593+0530 ERROR instance/beat.go:1015 Exiting: Beat meta file failed to
+open: open /usr/share/filebeat/data/meta.json: permission denied
+Exiting: Beat meta file failed to open: open /usr/share/filebeat/data/meta.json: permission denied
+
+healthpe/api-server-logs-pusher
+https://aws.amazon.com/premiumsupport/knowledge-center/ecs-unable-to-assume-role/
+
+Pipeline
+Server with efs volume —> mounted on jump server —> deploying filbert with efs mount point —>
+permission issue was there on efs level, so manually changed ownership of filebeat folder inside efs.
+
+phable-sc/api-server-logs-pusher
+
+api-server-logs-pusher
+FARGATEecsTaskExecutionRole
+0
+4096
+0
+2048
+
+/
+/filebeat
+
+"filebeat","-e","-strict.perms=false"
+
+CONFIG_DIR. /usr/share/filebeat/config
+LOGSTASH_LISTENER
+10.0.1.151:5046
+
+filebeat,-e,-strict.perms=false
+
+Mount
+Efs-logs
+/usr/share/logs/
+
+filebeat_data
+/usr/share/filebeat/data
+
+Sg for efs. sg-08e54452086ae959a
+sg-0fdb118be8b474ede
+
+PhablescApiServerLogsPusherRole
+AmazonECSTaskExecutionRolePolicy
+HealthPeEFSReadWritePolicy
+
+2022-11-07T19:19:09.902+0530INFO [input] log/input.go:171Configured paths:
+[/usr/share/logs/dev/apiserver/err*.log] {
+"input_id": "8961892c-4136-4c0d-b2d3-48b0d595d6bd"
+}
+
+2022-11-07T20:33:23.551+0530INFO [input] log/input.go:637File is falling under ignore_older before
+harvesting is finished. Adjust your close_* settings: /usr/share/logs/dev/apiserver/out.log {
+"input_id": "82c196c0-89d2-4f86-94e7-7598d73ea3e3",
+"source": "/usr/share/logs/dev/apiserver/out.log",
+"state_id": "native::2976250044860291437-45",
+"finished": false,
+"os_id": "2976250044860291437-45"
+}
+[2022-11-08T05:27:01,518][WARN
+][logstash.outputs.elasticsearch][main][42929337fcd602d806672e6058a1c1fdd50073f46916d9505511a23
+94727a81d] Could not index event to Elasticsearch. {:status=>400, :action=>["index", {:_id=>nil,
+:_index=>"filebeat-7.16.3", :routing=>nil}, {"message"=>"getAllPrescriptionsAdminV2 repository",
+"log"=>{"file"=>{"path"=>"}, "offset"=>2908339}, "sortOrder"=>1,
+"tags"=>["beats_input_codec_plain_applied"], "file"=>"GetAllPrescriptionsAdminUseCaseV2.js",
+"endDate"=>"2022-11-08T03:50:28.268Z", "service"=>"phable.api.backend.js",
+"startDate"=>"2022-10-08T03:50:28.267Z", "pageIndex"=>1, "pageSize"=>20, "assignedTo"=>7224006,
+"sortBy"=>"createdAt", "fields"=>{"app"=>"api", "env"=>"adminprod", "type"=>"out"},
+"agent"=>{"hostname"=>"ip-10-0-1-81.ap-south-1.compute.internal", "name"=>"filebeat",
+"ephemeral_id"=>"a7b18250-43b6-43f1-a4f1-f05a9eed45d1",
+"id"=>"cddf1225-a0db-4a7a-8359-42d3489504f1", "version"=>"7.16.3", "type"=>"filebeat"}, "level"=>"info",
+"timestamp"=>"2022-11-08T05:26:52.521Z", "status"=>0, "ecs"=>{"version"=>"1.12.0"},
+"type"=>"phable-api-server-logs", "@timestamp"=>2022-11-08T05:27:00.409Z, "cluster"=>"1",
+"input"=>{"type"=>"log"}, "host"=>{"name"=>"filebeat"}, "@version"=>"1",
+"json_data"=>"{\"assignedTo\":7224006,\"cluster\":\"1\",\"endDate\":\"2022-11-08T03:50:28.268Z\",\"file\":\"
+GetAllPrescriptionsAdminUseCaseV2.js\",\"level\":\"info\",\"message\":\"getAllPrescriptionsAdminV2
+repository\",\"pageIndex\":1,\"pageSize\":20,\"request_id\":\"f3af1600-5f25-11ed-aec9-09f952daeef0\",\"se
+rvice\":\"phable.api.backend.js\",\"sortBy\":\"createdAt\",\"sortOrder\":1,\"startDate\":\"2022-10-08T03:50:2
+8.267Z\",\"status\":0,\"timestamp\":\"2022-11-08T05:26:52.521Z\"}",
+"request_id"=>"f3af1600-5f25-11ed-aec9-09f952daeef0"}],
+:response=>{"index"=>{"_index"=>"filebeat-7.16.3", "_type"=>"_doc",
+"_id"=>"Eze0VYQBRAVgqUWmxtOJ", "status"=>400, "error"=>{"type"=>"mapper_parsing_exception",
+"reason"=>"failed to parse", "caused_by"=>{"type"=>"illegal_argument_exception", "reason"=>"Limit of
+total fields [1000] has been exceeded while adding new fields [1]"}}}}}
+
+error"=>{"type"=>"mapper_parsing_exception", "reason"=>"failed to parse",
+"caused_by"=>{"type"=>"illegal_argument_exception", "reason"=>"Limit of total fields [1000] has been
+exceeded while adding new fields [1]"}}}}}
+
+[2022-11-08T10:58:09,760][WARN
+][logstash.outputs.elasticsearch][main][42929337fcd602d806672e6058a1c1fdd50073f46916d9505511a23
+94727a81d] Could not index event to Elasticsearch. {:status=>400, :action=>["index", {:_id=>nil,
+
+:_index=>"filebeat-7.16.3", :routing=>nil}, {"message"=>"Body received
+{\"entity\":\"event\",\"account_id\":\"acc_CtpAyphH7r16B0\",\"event\":\"payment.failed\",\"contains\":[\"paym
+ent\"],\"payload\":{\"payment\":{\"entity\":{\"id\":\"pay_KdVwzq9z5Hon1M\",\"entity\":\"payment\",\"amount\":
+41600,\"currency\":\"INR\",\"status\":\"failed\",\"order_id\":\"order_KdVwym6jZYbTqR\",\"invoice_id\":null,\"i
+nternational\":false,\"method\":\"wallet\",\"amount_refunded\":0,\"refund_status\":null,\"captured\":false,\"de
+scription\":\"\",\"card_id\":null,\"bank\":null,\"wallet\":\"phonepe\",\"vpa\":null,\"email\":\"dummy@gmail.com\
+",\"contact\":\"+918770829633\",\"notes\":{\"txn_uuid\":\"euleDGfraBHzdt2wxTv\",\"transaction_id\":\"phabl
+ecare-8eb7d0fd-53317-1\"},\"fee\":null,\"tax\":null,\"error_code\":\"BAD_REQUEST_ERROR\",\"error_desc
+ription\":\"Your payment has been cancelled. Try again or complete the payment
+later.\",\"error_source\":\"customer\",\"error_step\":\"payment_authentication\",\"error_reason\":\"payment_t
+imed_out\",\"acquirer_data\":{\"transaction_id\":null},\"created_at\":1667903916}}},\"created_at\":16679050
+83}", "log"=>{"file"=>{"path"=>"/usr/share/logs/dev/api/out.log"}, "offset"=>40832672},
+"fields"=>{"app"=>"api", "env"=>"dev", "type"=>"out"},
+"agent"=>{"hostname"=>"ip-172-16-20-94.ap-south-1.compute.internal", "name"=>"filebeat",
+"ephemeral_id"=>"6167c532-68f1-4434-ad33-ece466e5f557",
+"id"=>"cddf1225-a0db-4a7a-8359-42d3489504f1", "version"=>"7.16.3", "type"=>"filebeat"},
+"tags"=>["beats_input_codec_plain_applied"], "level"=>"info",
+"timestamp"=>"2022-11-08T10:58:04.478Z", "ecs"=>{"version"=>"1.12.0"},
+"type"=>"phable-api-server-logs", "@timestamp"=>2022-11-08T10:58:08.652Z, "cluster"=>"1",
+"file"=>"RazorPayWebhookHandlerUseCase.js", "input"=>{"type"=>"log"},
+"service"=>"phable.api.backend.js", "host"=>{"name"=>"filebeat"},
+"field.orderId"=>"order_KdVwym6jZYbTqR", "@version"=>"1",
+"json_data"=>"{\"cluster\":\"1\",\"field.orderId\":\"order_KdVwym6jZYbTqR\",\"file\":\"RazorPayWebhookHa
+ndlerUseCase.js\",\"level\":\"info\",\"message\":\"Body received
+{\\\"entity\\\":\\\"event\\\",\\\"account_id\\\":\\\"acc_CtpAyphH7r16B0\\\",\\\"event\\\":\\\"payment.failed\\\",\\\"c
+ontains\\\":[\\\"payment\\\"],\\\"payload\\\":{\\\"payment\\\":{\\\"entity\\\":{\\\"id\\\":\\\"pay_KdVwzq9z5Hon1M\\\
+",\\\"entity\\\":\\\"payment\\\",\\\"amount\\\":41600,\\\"currency\\\":\\\"INR\\\",\\\"status\\\":\\\"failed\\\",\\\"order_i
+d\\\":\\\"order_KdVwym6jZYbTqR\\\",\\\"invoice_id\\\":null,\\\"international\\\":false,\\\"method\\\":\\\"wallet\\\",
+\\\"amount_refunded\\\":0,\\\"refund_status\\\":null,\\\"captured\\\":false,\\\"description\\\":\\\"\\\",\\\"card_id\\\"
+:null,\\\"bank\\\":null,\\\"wallet\\\":\\\"phonepe\\\",\\\"vpa\\\":null,\\\"email\\\":\\\"dummy@gmail.com\\\",\\\"conta
+ct\\\":\\\"+918770829633\\\",\\\"notes\\\":{\\\"txn_uuid\\\":\\\"euleDGfraBHzdt2wxTv\\\",\\\"transaction_id\\\":\\\
+"phablecare-8eb7d0fd-53317-1\\\"},\\\"fee\\\":null,\\\"tax\\\":null,\\\"error_code\\\":\\\"BAD_REQUEST_ERR
+OR\\\",\\\"error_description\\\":\\\"Your payment has been cancelled. Try again or complete the payment
+later.\\\",\\\"error_source\\\":\\\"customer\\\",\\\"error_step\\\":\\\"payment_authentication\\\",\\\"error_reason\\
+\":\\\"payment_timed_out\\\",\\\"acquirer_data\\\":{\\\"transaction_id\\\":null},\\\"created_at\\\":1667903916}}},
+\\\"created_at\\\":1667905083}\",\"request_id\":\"37dceb30-5f54-11ed-a072-c5ff46bcf25b\",\"service\":\"pha
+ble.api.backend.js\",\"timestamp\":\"2022-11-08T10:58:04.478Z\"}",
+"request_id"=>"37dceb30-5f54-11ed-a072-c5ff46bcf25b"}],
+:response=>{"index"=>{"_index"=>"filebeat-7.16.3", "_type"=>"_doc",
+"_id"=>"6HnjVoQBRAVgqUWm8BTc", "status"=>400, "error"=>{"type"=>"mapper_parsing_exception",
+"reason"=>"failed to parse", "caused_by"=>{"type"=>"illegal_argument_exception", "reason"=>"Limit of
+total fields [1000] has been exceeded while adding new fields [1]"}}}}}
+
+[2022-11-08T11:37:16,379][WARN
+][logstash.outputs.elasticsearch][main][42929337fcd602d806672e6058a1c1fdd50073f46916d9505511a23
+94727a81d] Could not index event to Elasticsearch. {:status=>400, :action=>["index", {:_id=>nil,
+:_index=>"filebeat-7.16.3", :routing=>nil}, {"message"=>"getAllPrescriptionsAdminV2 repository",
+"log"=>{"offset"=>13392714, "file"=>{"path"=>"/usr/share/new_logs/prod/api/out.log"}}, "sortOrder"=>1,
+
+"tags"=>["beats_input_codec_plain_applied"], "file"=>"GetAllPrescriptionsAdminUseCaseV2.js",
+"endDate"=>"2022-11-08T11:24:03.755Z", "service"=>"phable.api.backend.js",
+"startDate"=>"2022-10-08T11:24:03.754Z", "pageIndex"=>0, "pageSize"=>20, "assignedTo"=>7224006,
+"sortBy"=>"createdAt", "fields"=>{"app"=>"api", "env"=>"adminprod", "type"=>"out"},
+"agent"=>{"hostname"=>"ip-10-0-1-81.ap-south-1.compute.internal", "name"=>"filebeat",
+"ephemeral_id"=>"a7b18250-43b6-43f1-a4f1-f05a9eed45d1",
+"id"=>"cddf1225-a0db-4a7a-8359-42d3489504f1", "version"=>"7.16.3", "type"=>"filebeat"}, "level"=>"info",
+"timestamp"=>"2022-11-08T11:36:38.518Z", "status"=>0, "ecs"=>{"version"=>"1.12.0"},
+"type"=>"phable-api-server-logs", "@timestamp"=>2022-11-08T11:37:15.301Z, "cluster"=>"1",
+"input"=>{"type"=>"log"}, "host"=>{"name"=>"filebeat"}, "@version"=>"1",
+"json_data"=>"{\"assignedTo\":7224006,\"cluster\":\"1\",\"endDate\":\"2022-11-08T11:24:03.755Z\",\"file\":\"
+GetAllPrescriptionsAdminUseCaseV2.js\",\"level\":\"info\",\"message\":\"getAllPrescriptionsAdminV2
+repository\",\"pageIndex\":0,\"pageSize\":20,\"request_id\":\"9b920700-5f59-11ed-8450-dd567861275a\",\"
+service\":\"phable.api.backend.js\",\"sortBy\":\"createdAt\",\"sortOrder\":1,\"startDate\":\"2022-10-08T11:24:
+03.754Z\",\"status\":0,\"timestamp\":\"2022-11-08T11:36:38.518Z\"}",
+"request_id"=>"9b920700-5f59-11ed-8450-dd567861275a"}],
+:response=>{"index"=>{"_index"=>"filebeat-7.16.3", "_type"=>"_doc",
+"_id"=>"CIAHV4QBRAVgqUWmv1pW", "status"=>400, "error"=>{"type"=>"mapper_parsing_exception",
+"reason"=>"failed to parse", "caused_by"=>{"type"=>"illegal_argument_exception", "reason"=>"Limit of
+total fields [1000] has been exceeded while adding new fields [1]"}}}}}
+
+[2022-11-08T17:39:36,776][WARN
+][logstash.outputs.elasticsearch][main][f9e222c6bd5ca76df890a519c70b240108aebc28ad872f5854a345f
+4a971dcf4] Could not index event to Elasticsearch. {:status=>400, :action=>["index", {:_id=>nil,
+:_index=>"filebeat-7.16.3", :routing=>nil}, {"service"=>"phable.api.backend.js",
+"type"=>"phable-api-server-logs", "file"=>"GetAllPrescriptionsAdminUseCaseV2.js",
+"fields"=>{"app"=>"api", "type"=>"out", "env"=>"adminprod"}, "ecs"=>{"version"=>"1.12.0"}, "cluster"=>"1",
+"endDate"=>"2022-11-08T10:17:13.153Z", "input"=>{"type"=>"log"}, "pageIndex"=>0,
+"agent"=>{"hostname"=>"ip-10-0-1-81.ap-south-1.compute.internal", "type"=>"filebeat",
+"id"=>"cddf1225-a0db-4a7a-8359-42d3489504f1", "version"=>"7.16.3", "name"=>"filebeat",
+"ephemeral_id"=>"a7b18250-43b6-43f1-a4f1-f05a9eed45d1"}, "pageSize"=>50,
+"request_id"=>"49d48cc0-5f8c-11ed-af4f-1171fb36fe4d", "timestamp"=>"2022-11-08T17:39:25.713Z",
+"@version"=>"1", "host"=>{"name"=>"filebeat"}, "message"=>"getAllPrescriptionsAdminV2 repository",
+"sortOrder"=>1,
+"json_data"=>"{\"cluster\":\"1\",\"endDate\":\"2022-11-08T10:17:13.153Z\",\"file\":\"GetAllPrescriptionsAdmi
+nUseCaseV2.js\",\"level\":\"info\",\"message\":\"getAllPrescriptionsAdminV2
+repository\",\"pageIndex\":0,\"pageSize\":50,\"request_id\":\"49d48cc0-5f8c-11ed-af4f-1171fb36fe4d\",\"ser
+vice\":\"phable.api.backend.js\",\"sortBy\":\"createdAt\",\"sortOrder\":1,\"startDate\":\"2022-10-08T10:17:13
+.153Z\",\"status\":4,\"timestamp\":\"2022-11-08T17:39:25.713Z\"}",
+"tags"=>["beats_input_codec_plain_applied"], "sortBy"=>"createdAt", "status"=>4,
+"@timestamp"=>2022-11-08T17:39:36.079Z, "level"=>"info", "startDate"=>"2022-10-08T10:17:13.153Z",
+"log"=>{"offset"=>17346951, "file"=>{"path"=>"/usr/share/new_logs/prod/api/out.log"}}}],
+:response=>{"index"=>{"_index"=>"filebeat-7.16.3", "_type"=>"_doc", "_id"=>"_iBTWIQBwwVyn5CFenXI",
+"status"=>400, "error"=>{"type"=>"mapper_parsing_exception", "reason"=>"failed to parse",
+
+"caused_by"=>{"type"=>"illegal_argument_exception", "reason"=>"Limit of total fields [1000] has been
+exceeded while adding new fields [1]"}}}}}
+
+[2022-11-08T18:09:32,322][WARN ][logstash.filters.json
+][main][54fa565965a428f0eb6c9c6c608acf19b7b4924b3ad1d661d19b5674ca48e593] Error parsing json
+{:source=>"json_data", :raw=>"{\"cluster\":\"1\",\"file\":\"app.js\",\"level\":\"info\",\"message\":\"- - -
+7629be90-5f90-11ed-bbe5-5fbb879372bc GET /api/authenticate/ {200} 16 - 3.520
+ms\\n\",\"request_id\":\"7629be90-5f90-11ed-bbe5-5fbb879372bc39:21:
+{\"cluster\":\"1\",\"file\":\"app.js\",\"level\":\"info\",\"message\":\"Patient Android 5.5
+78164c50-5f90-11ed-91c7-573f13fbf742 PUT /api/ping {412} 104 - 1.153
+ms\\n\",\"request_id\":\"78164c50-5f90-11ed-91c7-573f13fbf742\",\"service\":\"phable.api.backend.js\",\"ti
+mestamp\":\"2022-11-08T18:09:21.302Z\"}", :exception=>#<LogStash::Json::ParserError: Unexpected
+character ('c' (code 99)): was expecting comma to separate Object entries
+
+[2022-11-09T10:34:30,615][WARN ][logstash.filters.json
+][main][54fa565965a428f0eb6c9c6c608acf19b7b4924b3ad1d661d19b5674ca48e593] Error
+parsing json {:source=>"json_data", :raw=>"03.080Z\"}",
+:exception=>#<LogStash::Json::ParserError: Invalid numeric value: Leading zeroes not
+allowed
+at [Source: (byte[])"03.080Z"}"; line: 1, column: 2]>}
+[2022-11-09T10:34:30,616][WARN ][logstash.filters.json
+][main][54fa565965a428f0eb6c9c6c608acf19b7b4924b3ad1d661d19b5674ca48e593] Error
+parsing json {:source=>"json_data", :raw=>"25.359Z\"}",
+:exception=>#<LogStash::Json::ParserError: Unexpected character ('Z' (code 90)):
+Expected space separating root-level values
+at [Source: (byte[])"25.359Z"}"; line: 1, column: 8]>}
+
+elasticsearch(ec2)—>logstash(ec2)—> filebeat(ecs)—farget instance —> bitbucket -->—jump server(efs
+mount)—> ec2(logs)
+
+[2022-11-09T13:51:51,001][WARN ][logstash.filters.json
+][main][54fa565965a428f0eb6c9c6c608acf19b7b4924b3ad1d66
+1d19b5674ca48e593] Error parsing json {:source=>"json_data",
+:raw=>"03.182Z\\\"}\\n\",\"timestamp\":\"2022-11-09T19:21:03\",\
+"type\":\"out\",\"process_id\":1,\"app_name\":\"phable-api\"}",
+:exception=>#<LogStash::Json::ParserError: Invalid numeric
+value: Leading zeroes not allowed
+
+
+
+--------------------------------------------------
+Deploying filebeat to push nginx logs to ElasticSearch using ansible playbook or any script
+
+
+Dockerfile for filebeat —> deploy on ec2 machine to fetch nginx logs to Logstash or elasticsearch.
+Playbook or script should be like
+1. Do login to machine and upload or copy our docker files
+2. Then run that dockerfile
+
+https://sysadmins.co.za/how-to-ingest-nginx-access-logs-to-elasticsearch-using-filebeat-and-logstash/
+
+https://medium.com/krakensystems-blog/transforming-and-sending-nginx-log-data-to-elasticsearch-using-
+filebeat-and-logstash-part-1-61e4e19f5e54
+
+https://discuss.elastic.co/t/enabling-nginx-module-in-filebeat-on-docker/143256/2
+Filebeat has nginx module
+Metrics fetch— system metrics like ram rom and cpu
+Nginx stats - ip and count of request
+Nginx logs - access and error.
+
+10227
+docker run --name es -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" -e
+"xpack.security.enabled=false" -p 9200:9200 -p 9300:9300 -it
+docker.elastic.co/elasticsearch/elasticsearch:8.5.0
+
+docker run -itd -v /home/ec2-user/grafana:/var/lib/grafana -p 3000:3000 --name grafana
+grafana/grafana-enterprise
+
+✅ Elasticsearch security features have been automatically configured!
+✅ Authentication is enabled and cluster connections are encrypted.
+i️ Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
+XqUiQ4y_YnUFv34jJwCy
+i️ HTTP CA certificate SHA-256 fingerprint:
+cf61838a4f6697382c12b146048451663d408bb7ec35b448048b1bbb93f7dac6
+i️ Configure Kibana to use this cluster:
+• Run Kibana and click the configuration link in the terminal when Kibana starts.
+• Copy the following enrollment token and paste it into Kibana in your browser (valid for the next 30
+minutes):
+eyJ2ZXIiOiI4LjUuMCIsImFkciI6WyIxNzIuMTcuMC4yOjkyMDAiXSwiZmdyIjoiY2Y2MTgzOGE0ZjY2OTczO
+DJjMTJiMTQ2MDQ4NDUxNjYzZDQwOGJiN2VjMzViNDQ4MDQ4YjFiYmI5M2Y3ZGFjNiIsImtleSI6IlVXU0
+RZSVFCLWw2bjc4TGR0VlkwOl9rTVlaZWg4VC1PUU04dU9UcmgtRkEifQ==
+i️ Configure other nodes to join this cluster:
+
+• Copy the following enrollment token and start new Elasticsearch nodes with `bin/elasticsearch
+--enrollment-token <token>` (valid for the next 30 minutes):
+eyJ2ZXIiOiI4LjUuMCIsImFkciI6WyIxNzIuMTcuMC4yOjkyMDAiXSwiZmdyIjoiY2Y2MTgzOGE0ZjY2OTczO
+DJjMTJiMTQ2MDQ4NDUxNjYzZDQwOGJiN2VjMzViNDQ4MDQ4YjFiYmI5M2Y3ZGFjNiIsImtleSI6IlUyU0
+RZSVFCLWw2bjc4TGR0VlpIOnhiWjF3a2VUUk1xeW03d002eU1fY3cifQ==
+If you're running in Docker, copy the enrollment token and run:
+`docker run -e "ENROLLMENT_TOKEN=<token>" docker.elastic.co/elasticsearch/elasticsearch:8.5.0`
+
+docker run -ti cr.fluentbit.io/fluent/fluent-bit:2.0 \
+fluent-bit -i cpu -t cpu -o es -p Host=3.7.243.69 -p Port=9200 \
+-p Index=cpu-status -p Type=cpu -o stdout -m '*'
+
+$ fluent-bit -i cpu -t cpu -o es -p Host=192.168.2.3 -p Port=9200 \
+-p Index=cpu-status -p Type=cpu -o stdout -m '*'
+
+curl -XPUT "http://3.7.243.69:9200/test/log”
+
+docker run -itd --name nginx -v /home/ec2-user/nginx:/var/log/nginx -p 80:80 nginx
+docker run -itd -v /home/ec2-user/nginx:/nginx --name bit 4403ea913f22
+
+https://github.com/fluent/fluent-bit/issues/1083
+https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/
+
+Even if we’ll manage to connect ebs..for different availibility zone will not work
+
+2cpu 4gb
+Volume -logstash-data
+/logstash/data/sincedb
+
+Inside container
+/usr/share/logstash/data/sincedb logstash-data
+
+APP_NAME healthpe
+CONFIG_DIR /usr/share/logstash/config
+ELASTIC_HOST https://10.0.1.151:9200
+ELASTIC_PASSWOR
+D
+
+rwsPcS42zpdgSEs6
+
+ELASTIC_USERNAM
+E
+
+alb-access-logs-pusher
+LS_JAVA_OPTS -Xmx2g -Xms2g
+
+AmazonECSTaskExecutionRolePolicy
+
+{
+"Version": "2012-10-17",
+"Statement": [
+{
+"Sid": "VisualEditor0",
+"Effect": "Allow",
+"Action": "s3:ListBucket",
+"Resource": "arn:aws:s3:::*"
+},
+{
+"Sid": "VisualEditor1",
+"Effect": "Allow",
+"Action": [
+"s3:GetObject",
+"s3:GetObjectVersion"
+],
+"Resource": [
+"arn:aws:s3:::healthpe-alb-logs/*",
+"arn:aws:s3:::healthpe-alb-logs-nonprod/*"
+]
+}
+]
+}
+
+{
+"Version": "2012-10-17",
+"Statement": [
+{
+"Sid": "",
+"Effect": "Allow",
+"Principal": {
+"Service": "ecs-tasks.amazonaws.com"
+},
+"Action": "sts:AssumeRole"
+}
+]
+}
+
+
+--------------------------------------------------
+Docker
+
+
+
+Remove all images on machine in one shot
+docker image prune --all --force
+
+Your settings are invalid. Reason: The setting `xpack.monitoring.elasticsearch.url` has been deprecated
+and removed from Logstash; please update your configuration to use
+`xpack.monitoring.elasticsearch.hosts` instead.
+
+docker-compose -f docker-compose.production.yml up --build -d metricbeat
+
+docker pull elastic/metricbeat:8.5.0
+
+docker pull elastic/metricbeat
+
+/etc/pki/ca-trust/source/anchors/ replaced by /etc/ssl/certs/
+
+CMD update-ca-trust extract \
+metricbeat setup -e --index-management --dashboards -E "output.logstash.enabled=false" -E
+"output.elasticsearch.hosts=['https://elasticsearch:9200']" -E
+"output.elasticsearch.ssl.certificate_authorities=["/etc/ssl/certs/ca.crt"]" -E
+"output.elasticsearch.ssl.certificates=${CONFIG_DIR}/metricbeat.crt" -E
+"output.elasticsearch.ssl.key=${CONFIG_DIR}/metricbeat.key"
+
+update-ca-trust force-enable
+
+dpkg-reconfigure ca-certificates extract
+
+
+
